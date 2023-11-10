@@ -12,15 +12,8 @@
             string lastFileName = "address.lis";
             string[] commandLine;
             Console.WriteLine("Hello and welcome to the contact list");
-            Console.WriteLine("Avaliable commands: ");
-            Console.WriteLine("  load        - load contact list data from the file address.lis");
-            Console.WriteLine("  load /file/ - load contact list data from the file");
-            Console.WriteLine("  new        - create new person");
-            Console.WriteLine("  new /persname/ /surname/ - create new person with personal name and surname");
-            Console.WriteLine("  quit        - quit the program");
-            Console.WriteLine("  save         - save contact list data to the file previously loaded");
-            Console.WriteLine("  save /file/ - save contact list data to the file");
-            Console.WriteLine();
+            WriteHelp();
+            
             do
             {
                 Console.Write($"> ");
@@ -110,40 +103,50 @@
                 }
                 else if (commandLine[0] == "new")
                 {
-                    if (commandLine.Length < 2)
-                    {
-                        Console.Write("personal name: ");
-                        string persname = Console.ReadLine();
-                        Console.Write("surname: ");
-                        string surname = Console.ReadLine();
-                        Console.Write("phone: ");
-                        string phone = Console.ReadLine();
-                    }
-                    else
-                    {
-                        // NYI!
-                        Console.WriteLine("Not yet implemented: new /person/");
-                    }
+                    PrintNew(commandLine);
                 }
                 else if (commandLine[0] == "help")
                 {
-                    Console.WriteLine("Avaliable commands: ");
-                    Console.WriteLine("  delete       - emtpy the contact list");
-                    Console.WriteLine("  delete /persname/ /surname/ - delete a person");
-                    Console.WriteLine("  load        - load contact list data from the file address.lis");
-                    Console.WriteLine("  load /file/ - load contact list data from the file");
-                    Console.WriteLine("  new        - create new person");
-                    Console.WriteLine("  new /persname/ /surname/ - create new person with personal name and surname");
-                    Console.WriteLine("  quit        - quit the program");
-                    Console.WriteLine("  save         - save contact list data to the file previously loaded");
-                    Console.WriteLine("  save /file/ - save contact list data to the file");
-                    Console.WriteLine();
+                    WriteHelp();
                 }
                 else
                 {
                     Console.WriteLine($"Unknown command: '{commandLine[0]}'");
                 }
             } while (commandLine[0] != "quit");
+        }
+
+        private static void PrintNew(string[] commandLine)
+        {
+            if (commandLine.Length < 2)
+            {
+                Console.Write("personal name: ");
+                string persname = Console.ReadLine();
+                Console.Write("surname: ");
+                string surname = Console.ReadLine();
+                Console.Write("phone: ");
+                string phone = Console.ReadLine();
+            }
+            else
+            {
+                // NYI!
+                Console.WriteLine("Not yet implemented: new /person/");
+            }
+        }
+
+        private static void WriteHelp()
+        {
+            Console.WriteLine("Avaliable commands: ");
+            Console.WriteLine("  delete       - emtpy the contact list");
+            Console.WriteLine("  delete /persname/ /surname/ - delete a person");
+            Console.WriteLine("  load        - load contact list data from the file address.lis");
+            Console.WriteLine("  load /file/ - load contact list data from the file");
+            Console.WriteLine("  new        - create new person");
+            Console.WriteLine("  new /persname/ /surname/ - create new person with personal name and surname");
+            Console.WriteLine("  quit        - quit the program");
+            Console.WriteLine("  save         - save contact list data to the file previously loaded");
+            Console.WriteLine("  save /file/ - save contact list data to the file");
+            Console.WriteLine();
         }
     }
 }
