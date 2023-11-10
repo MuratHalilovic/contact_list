@@ -9,15 +9,14 @@
         }
         public static void Main(string[] args)
         {
-            string lastFileName = "address.lis";
+            string lastFileName = "address.lis.txt";
             string[] commandLine;
             Console.WriteLine("Hello and welcome to the contact list");
             WriteHelp();
-            
+
             do
             {
-                Console.Write($"> ");
-                commandLine = Console.ReadLine().Split(' ');
+                commandLine = Input("> ").Split(' ');
                 if (commandLine[0] == "quit")
                 {
                     // NYI!
@@ -27,7 +26,7 @@
                 {
                     if (commandLine.Length < 2)
                     {
-                        lastFileName = "address.lis";
+                        lastFileName = "address.lis.txt";
                         using (StreamReader infile = new StreamReader(lastFileName))
                         {
                             string line;
@@ -103,7 +102,18 @@
                 }
                 else if (commandLine[0] == "new")
                 {
-                    PrintNew(commandLine);
+                    if (commandLine.Length < 2)
+                    {
+                        string persname = Input("Personal name: ");
+                        string surname = Input("Surname: ");
+                        string phone = Input("Phone: ");
+                        // NYI: Create person here and insert in list
+                    }
+                else
+                {
+                    // NYI!
+                    Console.WriteLine("Not yet implemented: new /person/");
+                }
                 }
                 else if (commandLine[0] == "help")
                 {
@@ -116,22 +126,10 @@
             } while (commandLine[0] != "quit");
         }
 
-        private static void PrintNew(string[] commandLine)
+        static string Input(string prompt) 
         {
-            if (commandLine.Length < 2)
-            {
-                Console.Write("personal name: ");
-                string persname = Console.ReadLine();
-                Console.Write("surname: ");
-                string surname = Console.ReadLine();
-                Console.Write("phone: ");
-                string phone = Console.ReadLine();
-            }
-            else
-            {
-                // NYI!
-                Console.WriteLine("Not yet implemented: new /person/");
-            }
+            Console.WriteLine(prompt);
+            return Console.ReadLine();
         }
 
         private static void WriteHelp()
