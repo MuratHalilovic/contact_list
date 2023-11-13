@@ -1,4 +1,6 @@
-﻿namespace dtp6_contacts
+﻿using System.Runtime.ConstrainedExecution;
+
+namespace dtp6_contacts
 {
     class MainClass
     {
@@ -6,6 +8,15 @@
         class Person
         {
             public string persname, surname, phone, address, birthdate;
+        }
+        static void WriteContactList()
+        {
+            for (int i = 0; i < contactList.Length; i++)
+            {
+                Person p = contactList[i];
+                    if(p != null)
+                        Console.WriteLine($"{p.persname}, {p.surname}, {p.phone}, {p.address}, {p.birthdate}");
+            }
         }
         public static void Main(string[] args)
         {
@@ -21,6 +32,10 @@
                 {
                     // NYI!
                     Console.WriteLine("Not yet implemented: safe quit");
+                }
+                else if (commandLine [0] == "list") 
+                {
+                    WriteContactList();
                 }
                 else if (commandLine[0] == "load")
                 {
@@ -89,7 +104,7 @@
                 string line;
                 while ((line = infile.ReadLine()) != null)
                 {
-                    Console.WriteLine(line);
+                    // Console.WriteLine(line);
                     string[] attrs = line.Split('|');
                     Person p = new Person();
                     p.persname = attrs[0];
@@ -112,7 +127,7 @@
 
         static string Input(string prompt) 
         {
-            Console.WriteLine(prompt);
+            Console.Write(prompt);
             return Console.ReadLine();
         }
 
